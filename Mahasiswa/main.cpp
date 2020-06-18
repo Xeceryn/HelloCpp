@@ -11,36 +11,54 @@
 #include <string>
 using namespace std;
 
-void swap(int *xp, int *yp) {
-    int temp = *xp;
-    *xp = *yp;
+typedef struct Mahasiswa {
+    string nama;
+    string jurusan;
+    float ipk;
+} Mhs;
+void swapStruct(Mhs *xp, Mhs *yp) {
+    Mhs temp = *xp;
+    *yp = *xp;
     *yp = temp;
 }
-void printArray(int array[], int size) {
+void printArrayStruct(Mhs array[], int size) {
     int i;
     for(i = 0; i < size; i++) {
-        printf("%d ", array[i]);
+        cout << "Data Mahasiswa" << endl;
+        cout << "--------------" << endl;
+        cout << "Nama: " << array[i].nama << endl;
+        cout << "Jurusan: " << array[i].jurusan << endl;
+        cout << "IPK: " << array[i].ipk << endl;
     }
     printf("\n");
 }
-void BubbleSort(int array[], int n) {
+void BubbleSortStruct(Mhs array[], int n) {
     int i, j;
-    for(i = 0; i < n - 1; i++) {
-        for (j = 0; j < n - 1; j++) {
-            if(array[j] > array[j + 1]) {
-                swap(&array[j], &array[j + 1]);
+    bool swaped;
+    for(i = 0; i < n-1; i++) {
+        swaped = false;
+        for (j = 0; j < n - i-1; j++) {
+            if(array[j].ipk > array[j + 1].ipk) {
+                swapStruct(&array[j], &array[j + 1]);
+                swaped = true;
             }
+        }
+        if(swaped == false) {
+            break;
         }
     }
 }
 int main() {
-    int arrayNumber[45] = {22, 34, 91, 2, 10, 22, 13, 88, 66, 35};
-    int n = sizeof(arrayNumber)/sizeof(arrayNumber[0]);
-    printf("Adhitya Musthofa \n");
-    printf("NRP: 2103187091 \n");
-    printf("Data sebelum sorting: \n");
-    printArray(arrayNumber, n);
-    BubbleSort(arrayNumber, n);
-    printf("\n Data setelah sorting: \n");
-    printArray(arrayNumber, n);
+    Mhs arrayMahasiswa[] = {
+        {"Achmad", "TELKOM", 2.2},
+        {"Musthofa", "IT", 3.4},
+        {"Adhitya", "RPL", 4.3}
+    };
+    int n = sizeof(arrayMahasiswa)/sizeof(arrayMahasiswa[0]);
+    printf("Sebelum sorting \n");
+    printArrayStruct(arrayMahasiswa, n);
+    BubbleSortStruct(arrayMahasiswa, n);
+    printf("\nSesudah sorting \n");
+    printArrayStruct(arrayMahasiswa, n);
+    return 0;
 }
