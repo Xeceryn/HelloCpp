@@ -11,54 +11,36 @@
 #include <string>
 using namespace std;
 
-typedef struct Mahasiswa {
-    string nama;
-    string jurusan;
-    float ipk;
-} Mhs;
-
-void swapStruct(Mhs *xp, Mhs *yp) {
-    Mhs temp= *xp;
-    *xp=*yp;
-    *yp=temp;
+void swap(int *xp, int *yp) {
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
 }
-void printArrayStruct(Mhs array[], int size) {
+void printArray(int array[], int size) {
     int i;
-    for(i=0;i<size;i++) {
-        cout << "Data Mahasiswa" <<endl;
-        cout << "--------------" <<endl;
-        cout << "Nama: " << array[i].nama <<endl;
-        cout << "Jurusan: " << array[i].jurusan <<endl;
-        cout << "IPK: " <<array[i].ipk <<endl;
+    for(i = 0; i < size; i++) {
+        printf("%d ", array[i]);
     }
     printf("\n");
 }
-void insertionSortStruct(Mhs array[], int n) {
+void BubbleSort(int array[], int n) {
     int i, j;
-    Mhs key;
-    for(i=1;i<n;i++) {
-        key = array[i];
-        j = i - 1;
-        
-        while (j >= 0 && array[j].ipk > key.ipk) {
-            array[j+1] = array[j];
-            j = j - 1;
+    for(i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1; j++) {
+            if(array[j] > array[j + 1]) {
+                swap(&array[j], &array[j + 1]);
+            }
         }
-        array[j + 1] = key;
     }
 }
 int main() {
-    Mhs arrayMhs[] = {
-        {"Adhitya", "RPL", 3.5},
-        {"Musthofa", "IT", 2.0},
-        {"Achmad", "TELKOM", 5.0}
-    };
-    
-    int n = sizeof(arrayMhs)/sizeof(arrayMhs[0]);
+    int arrayNumber[45] = {22, 34, 91, 2, 10, 22, 13, 88, 66, 35};
+    int n = sizeof(arrayNumber)/sizeof(arrayNumber[0]);
+    printf("Adhitya Musthofa \n");
+    printf("NRP: 2103187091 \n");
     printf("Data sebelum sorting: \n");
-    printArrayStruct(arrayMhs, n);
-    insertionSortStruct(arrayMhs, n);
+    printArray(arrayNumber, n);
+    BubbleSort(arrayNumber, n);
     printf("\n Data setelah sorting: \n");
-    printArrayStruct(arrayMhs, n);
-    return 0;
+    printArray(arrayNumber, n);
 }
